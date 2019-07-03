@@ -9,11 +9,10 @@ public class SimpleCipher {
     private JTextArea output;
     private static Encoder e = new Encoder();
     private static Decoder d = new Decoder();
-    private JFrame frame;
 
     public static void main(String[] args) {SimpleCipher s = new SimpleCipher();s.runner();}
 
-    public void runner()
+    private void runner()
     {
         class Listener implements ActionListener
         {
@@ -48,12 +47,13 @@ public class SimpleCipher {
             }
         }
 
-        frame = new JFrame("Simple Cipher");
+        JFrame frame = new JFrame("Simple Cipher");
         frame.setSize(380,300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new FlowLayout());
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
+        frame.setIconImage(new ImageIcon("C:\\Users\\hadia_000\\Documents\\JCreator LE\\MyProjects\\SimpleCipher\\src\\images\\icon.png").getImage());
 
         JButton encrypt = new JButton("Encrypt");
         JButton decrypt = new JButton("Decrypt");

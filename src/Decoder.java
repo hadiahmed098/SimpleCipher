@@ -1,5 +1,3 @@
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 public class Decoder {
 
     public String decodeStart(String input)

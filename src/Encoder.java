@@ -1,5 +1,3 @@
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import java.util.Random;
 public class Encoder {
 
