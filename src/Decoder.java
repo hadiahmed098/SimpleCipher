@@ -1,13 +1,13 @@
-public class Decoder {
+class Decoder {
 
-    public String decodeStart(String input)
+    String decodeStart(String input)
     {
         return decode(input);
     }
 
     private String decode(String input)
     {
-
+        //Turn output string into Morse Code
         String mCode = deRandomize(input);
 
 
@@ -49,8 +49,11 @@ public class Decoder {
 
         for(int i=0;i<randomCode.length()-1;i++)
         {
-            tempString = randomCode.substring(i,i+1);
+            tempString = randomCode.substring(i,i+1); //tempString is a character of the output string at index i
 
+            //WTF is this mess (2019)
+            //2018 me makes no sense
+            //TODO change the way converting an output string is turned into Morse Code
             if(tempString.indexOf('2')>-1 || tempString.indexOf('4')>-1 || tempString.indexOf('6')>-1 || tempString.indexOf('8')>-1)
             {
                 dRCode = dRCode + "-";
@@ -68,6 +71,7 @@ public class Decoder {
 
     private String morseDeCoder(String morseCode)
     {
+        //Hardcoded Morse Code library
         String morseChar = "";
 
         switch(morseCode)

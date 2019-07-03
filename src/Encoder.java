@@ -1,30 +1,40 @@
+import javax.swing.JOptionPane;
 import java.util.Random;
-public class Encoder {
+class Encoder {
 
-    public String encodeStart(String input)
+    String encodeStart(String input)
     {
         return encode(input);
     }
 
     private String encode(String input)
     {
-        String code = "";
-        String tCode = "";
-        String rCode = "";
+        //Initialize variables and sanitize inputs
+        String code = "";   //Output
+        String tCode = "";  //Transcribes Input -> Morse Code
+        String rCode = "";  //Randomizes Morse Code -> Output
 
         input = input.toLowerCase();
 
+        //Go through each character in the input string
         for(int i=0; i<input.length(); i++)
         {
-            tCode = morseCode(input.charAt(i));
-            rCode = randomize(tCode);
-            code = code + rCode;
+            try
+            {
+                tCode = morseCode(input.charAt(i)); //Encode the character into Morse Code
+            } catch (RuntimeException e)            //Unless the character is invalid
+            {
+                return "";
+            }
+            rCode = randomize(tCode); //Set the Morse Code pattern to a number pattern based on set of rules
+            code = code + rCode;      //Add the number pattern to the output string
         }
         return code;
     }
 
     private String morseCode(char letter)
     {
+        //hardcoded Morse Code library for encoding
         String response = "";
         switch(letter)
         {
@@ -70,7 +80,9 @@ public class Encoder {
             case '?': response = "..--../"; break;
             case '-': response = "-....-."; break;
             case '/': response = "-..-./"; break;
-            default: response = "/"; break;
+            case ' ': response= "/"; break;
+            //Check for invalid characters
+            default: JOptionPane.showMessageDialog(null,String.format("Invalid Character: \'%s\'", letter), "Error",JOptionPane.ERROR_MESSAGE); throw new RuntimeException("Invalid Character");
 
         }
         return response;
@@ -82,23 +94,23 @@ public class Encoder {
         String tempInt = "-1";
         int tempTempInt = -1;
         Random r = new Random();
-
-        for(int i=0;i<mCode.length();i++)
+        //TODO fix generation of random number to be the same for even/odd and more coherent
+        for(int i=0;i<mCode.length();i++) //Go through each character in the Morse Code string
         {
             if(mCode.charAt(i) == '-')
             {
-                tempInt = Integer.toString((r.nextInt(4)+1)*2);
+                tempInt = Integer.toString((r.nextInt(4)+1)*2); //If dash, convert into an even number
             }
-            else if(mCode.charAt(i) == '.')
+            else if(mCode.charAt(i) == '.') //If dot, convert into an odd number.
             {
                 do
                 {
-                    tempTempInt = r.nextInt(10);
+                    tempTempInt = r.nextInt(10); //generate random number and confirm its odd
                 } while(tempTempInt % 2 == 0);
 
                 tempInt = Integer.toString(tempTempInt);
             }
-            else if(mCode.charAt(i) == '/')
+            else if(mCode.charAt(i) == '/') //If slash, convert into 0
             {
                 tempInt = "0";
             }
