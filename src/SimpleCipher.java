@@ -15,7 +15,17 @@ public class SimpleCipher {
     public static void main(String[] args) {
         //Test for future release
         //TODO encode the output string as a series of ASCII characters
-        System.out.println((char) Integer.parseInt("0021",16)); System.out.println(Integer.toHexString(75));
+        /*
+            System.out.println(String.format("%04x", (int) '!'));
+            System.out.println((char) Integer.parseInt("0021",16));
+
+            So the range of usable values is u+100 - u+0199 only counting decimal values
+            Program flow: Enc: concat 2 digits from encoded string with '01' -> parseint using radix 16 and cast to char -> add to output string
+                          Dec: get char from output -> cast to int -> format using '%04x' -> parse to int -> modulo by 100 -> decode as normal
+                          @see https://stackoverflow.com/questions/16769753/java-char-to-its-unicode-hexadecimal-string-representation-and-vice-versa
+        */
+        //TODO add error checking into decoder, verify only valid chars are decoded
+
         new SimpleCipher().runner();
     }
 

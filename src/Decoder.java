@@ -10,33 +10,16 @@ class Decoder {
         //Turn output string into Morse Code
         String mCode = deRandomize(input);
 
-
-        String tempMCode = "";
         String output = "";
-        int i = 0;
 
-        while(i < mCode.length()-1)
-        {
-            while(mCode.charAt(i) != '/')
-            {
-                tempMCode = tempMCode + mCode.charAt(i);
-                i++;
-            }
-            tempMCode = tempMCode + "/";
-
-            output = output + morseDeCoder(tempMCode);
-            tempMCode = "";
-
-            if(i<mCode.length()-1 && mCode.charAt(i+1) == '/')
-            {
-                output = output + " ";
-                i++;
-            }
-            else
-                i++;
+        String[] mCodeArray = mCode.split("/");                    //Split the morse code string into an array based on '/'
+        for(String s: mCodeArray) {
+            if(s.length() == 0)                                           //If the string has length 0 it is a space
+                output = output.concat(" ");
+            output = output.concat(morseDeCoder(s + "/"));     //De-Morse Code the result and add to string
         }
 
-        output.trim();
+        output = output.trim();                                           //String postprocessing before return
         output = output.toUpperCase();
 
         return output;
@@ -49,24 +32,21 @@ class Decoder {
 
         for(int i=0;i<randomCode.length()-1;i++)
         {
-            tempString = randomCode.substring(i,i+1); //tempString is a character of the output string at index i
+            tempString = randomCode.substring(i,i+1);                     //tempString is a character of the output string at index i
 
-            //WTF is this mess (2019)
-            //2018 me makes no sense
-            //TODO change the way converting an output string is turned into Morse Code
-            if(tempString.indexOf('2')>-1 || tempString.indexOf('4')>-1 || tempString.indexOf('6')>-1 || tempString.indexOf('8')>-1)
+            if(Integer.parseInt(tempString)%2==0 && !tempString.equals("0"))
             {
-                dRCode = dRCode + "-";
-            } else if(tempString.indexOf('1')>-1 || tempString.indexOf('3')>-1 || tempString.indexOf('5')>-1 || tempString.indexOf('7')>-1 || tempString.indexOf('9')>-1)
+                dRCode = dRCode.concat("-");
+            } else if(Integer.parseInt(tempString)%2==1)
             {
-                dRCode = dRCode + ".";
+                dRCode = dRCode.concat(".");
             } else
             {
-                dRCode = dRCode + "/";
+                dRCode = dRCode.concat("/");
             }
         }
 
-        return dRCode + "/";
+        return dRCode.concat("/");
     }
 
     private String morseDeCoder(String morseCode)

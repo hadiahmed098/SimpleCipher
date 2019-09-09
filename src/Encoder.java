@@ -10,9 +10,8 @@ class Encoder {
     private String encode(String input)
     {
         //Initialize variables and sanitize inputs
-        String code = "";   //Output
-        String tCode = "";  //Transcribes Input -> Morse Code
-        String rCode = "";  //Randomizes Morse Code -> Output
+        String code = "";                                                       //Output
+        String tCode = "";                                                      //Temp variable to hold the value of the morse code
 
         input = input.toLowerCase();
 
@@ -21,15 +20,14 @@ class Encoder {
         {
             try
             {
-                tCode = morseCode(input.charAt(i)); //Encode the character into Morse Code
-            } catch (RuntimeException e)            //Unless the character is invalid
+                tCode = morseCode(input.charAt(i));                             //Encode the character into Morse Code
+            } catch (RuntimeException e)                                        //Unless the character is invalid
             {
                 return "";
             }
-            rCode = randomize(tCode); //Set the Morse Code pattern to a number pattern based on set of rules
-            code = code + rCode;      //Add the number pattern to the output string
+            code = code.concat(tCode);
         }
-        return code;
+        return randomize(code);
     }
 
     private String morseCode(char letter)
@@ -92,29 +90,24 @@ class Encoder {
     {
         String intString = "";
         String tempInt = "-1";
-        int tempTempInt = -1;
         Random r = new Random();
-        //TODO fix generation of random number to be the same for even/odd and more coherent
-        for(int i=0;i<mCode.length();i++) //Go through each character in the Morse Code string
+        for(int i=0;i<mCode.length();i++)                                       //Go through each character in the Morse Code string
         {
-            if(mCode.charAt(i) == '-')
+            if(mCode.charAt(i) == '-') //If dash, convert into an even number
             {
-                tempInt = Integer.toString((r.nextInt(4)+1)*2); //If dash, convert into an even number
+                tempInt = Integer.toString((r.nextInt(4)+1)*2);       //Random int on bounds 0-3, adds 1 and multiplies by 2 to avoid under 0 and over 10
+                                                                                //Gives an even number in range [2-8]
             }
             else if(mCode.charAt(i) == '.') //If dot, convert into an odd number.
             {
-                do
-                {
-                    tempTempInt = r.nextInt(10); //generate random number and confirm its odd
-                } while(tempTempInt % 2 == 0);
-
-                tempInt = Integer.toString(tempTempInt);
+                tempInt = Integer.toString(r.nextInt(5)*2 + 1);       //Random int on bounds 0-4, multiplies by 2, and adds 1 to avoid under 0 and over 10
+                                                                                //Gives an odd number in range[1-9]
             }
             else if(mCode.charAt(i) == '/') //If slash, convert into 0
             {
                 tempInt = "0";
             }
-            intString = intString + tempInt;
+            intString = intString.concat(tempInt);
         }
         return intString;
     }
