@@ -11,7 +11,8 @@ class Encoder {
     {
         //Initialize variables and sanitize inputs
         String code = "";                                                       //Output
-        String tCode = "";                                                      //Temp variable to hold the value of the morse code
+        String tCode;                                                           //Temp variable to hold the value of the morse code
+        String rCode;
 
         input = input.toLowerCase();
 
@@ -27,7 +28,8 @@ class Encoder {
             }
             code = code.concat(tCode);
         }
-        return randomize(code);
+        rCode = randomize(code);
+        return intStringToUnicode(rCode);
     }
 
     private String morseCode(char letter)
@@ -76,7 +78,7 @@ class Encoder {
             case ',': response = "--..--/"; break;
             case ':': response = "---.../"; break;
             case '?': response = "..--../"; break;
-            case '-': response = "-....-."; break;
+            case '-': response = "-....-./"; break;
             case '/': response = "-..-./"; break;
             case ' ': response= "/"; break;
             //Check for invalid characters
@@ -110,5 +112,21 @@ class Encoder {
             intString = intString.concat(tempInt);
         }
         return intString;
+    }
+
+    private String intStringToUnicode(String intString)
+    {
+        String outputString = "";
+
+        if(intString.length()%2!=0) {
+            intString = intString.concat("0");
+        }
+
+        for(int i=0; i<intString.length(); i=i+2) {
+            String subIntString = intString.substring(i,i+2);
+
+            outputString = outputString.concat(Character.toString((char) Integer.parseInt("01"+subIntString,16)));
+        }
+        return outputString;
     }
 }

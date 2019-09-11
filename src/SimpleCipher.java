@@ -13,42 +13,22 @@ public class SimpleCipher {
     private static Decoder d = new Decoder();
 
     public static void main(String[] args) {
-        //Test for future release
-        //TODO encode the output string as a series of ASCII characters
-        /*
-            System.out.println(String.format("%04x", (int) '!'));
-            System.out.println((char) Integer.parseInt("0021",16));
-
-            So the range of usable values is u+100 - u+0199 only counting decimal values
-            Program flow: Enc: concat 2 digits from encoded string with '01' -> parseint using radix 16 and cast to char -> add to output string
-                          Dec: get char from output -> cast to int -> format using '%04x' -> parse to int -> modulo by 100 -> decode as normal
-                          @see https://stackoverflow.com/questions/16769753/java-char-to-its-unicode-hexadecimal-string-representation-and-vice-versa
-        */
-        //TODO add error checking into decoder, verify only valid chars are decoded
-
         new SimpleCipher().runner();
     }
 
-    private void runner() //Creates and runs the GUI
+    private void runner()                                           //Creates and runs the GUI
     {
-        //Inner class to handle user actions from GUI
-        class Listener implements ActionListener
+        class Listener implements ActionListener                    //Inner class to handle user actions from GUI
         {
             public void actionPerformed(ActionEvent evt)
             {
-                if(evt.getActionCommand().equals("Encrypt")) //Handles input from the Plaintext box
+                if(evt.getActionCommand().equals("Encrypt"))        //Handles input from the Plaintext box
                 {
                     output.setText("");
                     output.setText(e.encodeStart(input.getText()));
                 }
-                else //Handles input from the Encrypted box
+                else                                                //Handles input from the Encrypted box
                 {
-                    if(!checkOutput(output.getText())) //Verifies input only contains numbers
-                    {
-                        JOptionPane.showMessageDialog(null,"Encrypted Text Can Only Contain Numbers!","Error",JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
-
                     input.setText("");
                     input.setText(d.decodeStart(output.getText()));
                 }
@@ -93,21 +73,5 @@ public class SimpleCipher {
         frame.add(decrypt);
 
         frame.setVisible(true);
-    }
-
-    //Private method to verify encrypted text box only contains numbers
-    private boolean checkOutput(String out)
-    {
-        for(int i=0;i<out.length();i++)
-        {
-            try
-            {
-                Integer.parseInt(out.substring(i,i+1));
-            } catch(NumberFormatException nfe)
-            {
-                return false;
-            }
-        }
-        return true;
     }
 }

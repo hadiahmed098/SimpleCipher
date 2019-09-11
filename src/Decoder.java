@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 class Decoder {
 
     String decodeStart(String input)
@@ -7,8 +9,18 @@ class Decoder {
 
     private String decode(String input)
     {
-        //Turn output string into Morse Code
-        String mCode = deRandomize(input);
+        if(input.length()==0)
+            return "";
+
+        String intString;                                                 //Turn Unicode characters into the int string
+        try {
+            intString = unicodeToIntString(input);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+            return "";
+        }
+
+        String mCode = deRandomize(intString);                            //Turn int string into Morse Code
 
         String output = "";
 
@@ -23,6 +35,24 @@ class Decoder {
         output = output.toUpperCase();
 
         return output;
+    }
+
+    private String unicodeToIntString(String unicodeString)
+    {
+        char[] unicodeArray = unicodeString.toCharArray();
+        String outputString = "";
+
+        for(char c : unicodeArray) {
+            int check = Integer.parseInt(String.format("%04x", (int) c));
+
+            if(check < 100 || check >199)
+                throw new IllegalArgumentException("Output contains invalid character!");
+
+
+            outputString = outputString.concat(Integer.toString(check).substring(1));
+        }
+
+        return outputString;
     }
 
     private String deRandomize(String randomCode)
@@ -96,7 +126,7 @@ class Decoder {
             case "--..--/": morseChar = ","; break;
             case "---.../": morseChar = ":"; break;
             case "..--../": morseChar = "?"; break;
-            case "-....-.": morseChar = "-"; break;
+            case "-....-./": morseChar = "-"; break;
             case "-..-./": morseChar = "/"; break;
         }
 
