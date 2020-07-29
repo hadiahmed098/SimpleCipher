@@ -1,10 +1,14 @@
+package io.github.hadiahmed098.SimpleCipher;
+
 import javax.swing.*;
 
-class Decoder {
+public class Decoder {
 
-    String decodeStart(String input)
+    private static final Decoder INSTANCE = new Decoder();
+
+    public static String decodeStart(String input)
     {
-        return decode(input);
+        return INSTANCE.decode(input);
     }
 
     private String decode(String input)

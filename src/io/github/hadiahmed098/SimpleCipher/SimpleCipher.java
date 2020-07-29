@@ -1,3 +1,5 @@
+package io.github.hadiahmed098.SimpleCipher;
+
 import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
 import javax.swing.*;
@@ -9,8 +11,6 @@ public class SimpleCipher {
     //Private variables
     private JTextArea input;
     private JTextArea output;
-    private static Encoder e = new Encoder();
-    private static Decoder d = new Decoder();
 
     public static void main(String[] args) {
         new SimpleCipher().runner();
@@ -25,12 +25,12 @@ public class SimpleCipher {
                 if(evt.getActionCommand().equals("Encrypt"))        //Handles input from the Plaintext box
                 {
                     output.setText("");
-                    output.setText(e.encodeStart(input.getText()));
+                    output.setText(Encoder.encodeStart(input.getText()));
                 }
                 else                                                //Handles input from the Encrypted box
                 {
                     input.setText("");
-                    input.setText(d.decodeStart(output.getText()));
+                    input.setText(Decoder.decodeStart(output.getText()));
                 }
             }
         }

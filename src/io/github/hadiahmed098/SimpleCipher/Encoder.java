@@ -1,10 +1,14 @@
+package io.github.hadiahmed098.SimpleCipher;
+
 import javax.swing.JOptionPane;
 import java.util.Random;
-class Encoder {
+public class Encoder {
 
-    String encodeStart(String input)
+    private static final Encoder INSTANCE = new Encoder();
+
+    public static String encodeStart(String input)
     {
-        return encode(input);
+        return INSTANCE.encode(input);
     }
 
     private String encode(String input)
@@ -82,9 +86,11 @@ class Encoder {
             case '/': response = "-..-./"; break;
             case ' ': response= "/"; break;
             //Check for invalid characters
-            default: JOptionPane.showMessageDialog(null,String.format("Invalid Character: \'%s\'", letter), "Error",JOptionPane.ERROR_MESSAGE); throw new RuntimeException("Invalid Character");
-
+            default: JOptionPane.showMessageDialog(null,
+                    "Invalid Character: " + String.format("U+%4s", Integer.toHexString((int)letter).toUpperCase()).replace(' ', '0'), "Error",JOptionPane.ERROR_MESSAGE);
+                    throw new RuntimeException("Invalid Character");
         }
+        System.out.print('0' * 3);
         return response;
     }
 
