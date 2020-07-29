@@ -5,6 +5,7 @@ import java.util.Random;
 public class Encoder {
 
     private static final Encoder INSTANCE = new Encoder();
+    private static Random r = new Random();
 
     public static String encodeStart(String input)
     {
@@ -98,7 +99,6 @@ public class Encoder {
     {
         String intString = "";
         String tempInt = "-1";
-        Random r = new Random();
         for(int i=0;i<mCode.length();i++)                                       //Go through each character in the Morse Code string
         {
             if(mCode.charAt(i) == '-') //If dash, convert into an even number

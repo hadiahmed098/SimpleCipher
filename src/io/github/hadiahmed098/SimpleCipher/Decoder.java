@@ -47,13 +47,13 @@ public class Decoder {
         String outputString = "";
 
         for(char c : unicodeArray) {
-            int check = Integer.parseInt(String.format("%04x", (int) c));
+            int check = Integer.parseInt(String.format("%04x", (int) c)); // Turns the character into the unicode hex
 
-            if(check < 100 || check >199)
+            if(check < 100 || check >199)       // Check charset for valid character between U+0100 and U+0199
                 throw new IllegalArgumentException("Output contains invalid character!");
 
 
-            outputString = outputString.concat(Integer.toString(check).substring(1));
+            outputString = outputString.concat(Integer.toString(check).substring(1)); //Trim the first 1 from the code
         }
 
         return outputString;
