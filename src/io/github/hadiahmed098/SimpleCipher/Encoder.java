@@ -91,7 +91,6 @@ public class Encoder {
                     "Invalid Character: " + String.format("U+%4s", Integer.toHexString((int)letter).toUpperCase()).replace(' ', '0'), "Error",JOptionPane.ERROR_MESSAGE);
                     throw new RuntimeException("Invalid Character");
         }
-        System.out.print('0' * 3);
         return response;
     }
 
@@ -124,13 +123,15 @@ public class Encoder {
     {
         String outputString = "";
 
-        if(intString.length()%2!=0) {
+        if(intString.length()%2!=0) { // Make sure string is even number of characters, last 0 will be stripped during decoding
             intString = intString.concat("0");
         }
 
+        // Grab every two numbers off of the string and convert them to Unicode.
         for(int i=0; i<intString.length(); i=i+2) {
             String subIntString = intString.substring(i,i+2);
 
+            // See charset.png for more info on possible characters
             outputString = outputString.concat(Character.toString((char) Integer.parseInt("01"+subIntString,16)));
         }
         return outputString;
