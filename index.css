@@ -1,0 +1,48 @@
+body {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  width: 100%
+}
+
+#header {
+
+}
+
+#input {
+  margin-bottom: 10px;
+}
+
+#output {
+  margin-bottom: 10px;
+}
+
+#actions {
+  padding: 5px;
+  margin: 0 25% 0 25%;
+}
+
+.button {
+  border-radius: 5px;
+  background-color: #b0b0b0;
+  padding: 5px;
+  margin: 10px;
+}
+
+.button:hover {
+  background-color: lightgray;
+  color: black;
+}
+
+textarea {
+  resize: none;
+  padding: 5px;
+  border-radius: 3px;
+  border: solid 1px grey;
+  background-color: lightgray;
+}
+
+textarea:focus, textarea:hover {
+  border: solid 1px black;
+  background-color: white;
+}

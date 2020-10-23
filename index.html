@@ -10,14 +10,23 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <div>
+    <div id="header">
       <h1>Simple Cipher</h1>
       <h4>A project by Hadi Ahmed</h4>
       <h4>Download the Java App <a href="SimpleCipher.jar">here</a>.</h4>
       <h4>View the project on <a href="https://github.com/hadiahmed098/SimpleCipher">GitHub</a>.</h4>
     </div>
-    <div>
-
+    <div id="input">
+      <p>Plaintext:</p>
+      <textarea cols="50" rows="5" name="plaintext" placeholder="Enter PlainText..."></textarea>
+    </div>
+    <div id="output">
+      <p>Ciphertext:</p>
+      <textarea cols="50" rows="5" name="ciphertext" placeholder="Enter CipherText..."></textarea>
+    </div>
+    <div id="actions">
+      <div class="button">Generate Ciphertext</div>
+      <div class="button">Generage Plaintext</div>
     </div>
   </body>
 </html>
