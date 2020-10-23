@@ -12,3 +12,6 @@ Every run, the numbers and characters in the encoded string will change, but the
 ### Project History ###
 Originally thought of in late 2016 and implemented in a Proof of Concept by early 2017. This is technically the second version with a proper UI.
 This program has no real value as its a very weak encoding method. It's meant as a fun project.
+
+### Web Deployment ###
+The Java app was rewritten to a JavaScript and HTML page for web deployment. The logic is exactly the same, but only the language is different.
