@@ -25,13 +25,16 @@ body {
 .button {
   border-radius: 5px;
   background-color: #b0b0b0;
-  padding: 5px;
-  margin: 10px;
+  width: 25%;
+  min-width: 200px;
+  margin: 10px auto;
+  padding: 10px;
 }
 
 .button:hover {
   background-color: lightgray;
   color: black;
+  cursor: pointer;
 }
 
 textarea {
@@ -39,7 +42,7 @@ textarea {
   padding: 5px;
   border-radius: 3px;
   border: solid 1px grey;
-  background-color: lightgray;
+  background-color: #f2f2f2;
 }
 
 textarea:focus, textarea:hover {
