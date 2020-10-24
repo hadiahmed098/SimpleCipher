@@ -1,5 +1,4 @@
 function encode() {
-  console.log("click");
   let input = document.getElementsByName("plaintext")[0].value.toLowerCase();
   let code = "";
   let tCode;
@@ -66,7 +65,7 @@ function morseCode(letter) {
     case '-': response = "-....-./"; break;
     case '/': response = "-..-./"; break;
     case ' ': response= "/"; break;
-    default : alert(`Invalid Character: U+${letter.charCodeAt(0).toString(16)}!`); 
+    default : alert(`Invalid Plaintext Character: U+${letter.charCodeAt(0).toString(16)}!`); 
               throw "Invalid Character";
   }
 
@@ -103,10 +102,9 @@ function intStringToUnicode(intString) {
 
   for(let i=0; i<intString.length; i=i+2) {
     let subIntString = intString.substring(i, i+2);
-    console.log("test");
-    let wonkyHexStuff = parseInt("01"+subIntString, 16);
+
+    let wonkyHexStuff = parseInt("01"+subIntString, 16); // God Java made this so much easier...
     outputString = outputString.concat(String.fromCodePoint(wonkyHexStuff));
-    console.log(wonkyHexStuff);
   }
 
   return outputString;
